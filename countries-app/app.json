@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "plugins": [
+      "expo-router",
+      "expo-video"
+    ],
+    "name": "countries-app",
+    "slug": "countries-app"
+  }
+}

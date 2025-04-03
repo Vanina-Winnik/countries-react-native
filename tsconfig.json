@@ -1,34 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "jsx": "react-native",
-    "strict": true,
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "baseUrl": "./",
-    "paths": {
-      "@app/*": [
-        "app/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ]
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "jsx": "react-native",
+      "strict": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "moduleResolution": "node",
+      "allowJs": true,
+      "skipLibCheck": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true
     }
-  },
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js"
-  ],
-  "extends": "expo/tsconfig.base",
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
 }

@@ -13,6 +13,8 @@
 - 🎨 **React Native Paper** para la interfaz de usuario
 - 🎥 **Expo AV** para reproducción de video HLS
 
+  Por temas de compatibilidad y estabilidad, decidí usar expo-av para la reproducción de video. Soy consciente de que está deprecado en favor de expo-video, pero esta opción permitió una   integración más sencilla y sin conflictos con TypeScript en el contexto del test técnico.
+
 ---
 
 ## 📦 Instalación y Ejecución

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { GET_COUNTRIES } from '../graphql/queries';
+import { GET_COUNTRIES } from '@graphql/queries';
 interface CountryFilterInput {
   code?: { eq: string };
 }

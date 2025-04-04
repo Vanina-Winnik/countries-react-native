@@ -2,10 +2,15 @@
   "expo": {
     "scheme": "acme",
     "plugins": [
-      "expo-router",
-      "expo-video"
+      "expo-router"
     ],
     "name": "countries-app",
-    "slug": "countries-app"
+    "slug": "countries-app",
+    "android": {
+      "newArchEnabled": true
+    },
+    "ios": {
+      "newArchEnabled": true
+    }
   }
 }

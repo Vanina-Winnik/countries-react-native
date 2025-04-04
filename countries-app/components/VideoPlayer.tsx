@@ -1,64 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Button, Dimensions } from 'react-native';
-import { useVideoPlayer, VideoView } from 'expo-video';
+import React, { useRef, useState } from 'react';
+import { View, Button, Text } from 'react-native';
+import { Video, ResizeMode } from 'expo-av';
+import { videoPlayerStyles as styles } from '@styles/videoPlayer.styles';
 interface VideoPlayerProps {
   videoUrl: string;
 }
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl }) => {
-  const player = useVideoPlayer(videoUrl, (player) => {
-    player.loop = true;
-    player.play();
-  });
-
+  const videoRef = useRef<Video>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const updateState = () => setIsPlaying(player.playing);
-    player.addListener('playingChange', updateState);
+  const handlePlayPause = async () => {
+    if (videoRef.current) {
+      const status = await videoRef.current.getStatusAsync();
+      if (status.isLoaded) {
+        if (status.isPlaying) {
+          await videoRef.current.pauseAsync();
+          setIsPlaying(false);
+        } else {
+          await videoRef.current.playAsync();
+          setIsPlaying(true);
+        }
+      }
+    }
+  };
 
-    return () => {
-      player.removeListener('playingChange', updateState);
-    };
-  }, [player]);
+  const handleProgress = (status: any) => {
+    if (status.isLoaded && status.durationMillis) {
+      setProgress((status.positionMillis / status.durationMillis) * 100);
+      setIsPlaying(status.isPlaying);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <VideoView 
-        style={styles.video} 
-        player={player} 
-        allowsFullscreen 
-        allowsPictureInPicture 
+      <Video
+        ref={videoRef}
+        source={{ uri: videoUrl }}
+        style={styles.video}
+        resizeMode={ResizeMode.CONTAIN}
+        useNativeControls
+        isLooping
+        onPlaybackStatusUpdate={handleProgress}
       />
       <View style={styles.controlsContainer}>
-        <Button
-          title={isPlaying ? 'Pause' : 'Play'}
-          onPress={() => {
-            if (isPlaying) {
-              player.pause();
-            } else {
-              player.play();
-            }
-            setIsPlaying(!isPlaying);
-          }}
-        />
+        <Button title={isPlaying ? 'Pause' : 'Play'} onPress={handlePlayPause} />
+        <Text style={styles.progressText}>Progress: {progress.toFixed(1)}%</Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: Dimensions.get('window').width,
-    height: 320,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  video: {
-    width: '90%',
-    height: 250,
-  },
-  controlsContainer: {
-    marginTop: 10,
-  },
-});

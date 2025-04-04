@@ -13,7 +13,7 @@
 - 🎨 **React Native Paper** para la interfaz de usuario
 - 🎥 **Expo AV** para reproducción de video HLS
 
-  Por temas de compatibilidad y estabilidad, decidí usar expo-av para la reproducción de video. Soy consciente de que está deprecado en favor de expo-video, pero esta opción permitió una   integración más sencilla y sin conflictos con TypeScript en el contexto del test técnico.
+Por temas de compatibilidad y estabilidad, decidí usar expo-av para la reproducción de video. Soy consciente de que está deprecado en favor de expo-video, pero esta opción permitió una   integración más sencilla y sin conflictos con TypeScript en el contexto del test técnico.
 
 ---
 
@@ -39,7 +39,11 @@ npm install
 
 npx expo start
 
-Luego escanea el código QR con Expo Go o usa un emulador.
+Luego, podés:
+
+  - Escanear el código QR con la app Expo Go desde tu dispositivo móvil.
+  - Presionar "a" para abrir el emulador de Android.
+  - Presionar "i" para abrir el emulador de iOS.
 
 📂 Estructura del Proyecto
 
